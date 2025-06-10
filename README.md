@@ -43,5 +43,34 @@ https://www.kaggle.com/competitions/lux-ai-season-3/data
 
 ## 4. Methodology & Approach
 
+Since it was not a trivial task, data exploration, trial and error were done throughout the project. However, the works may be divided into the following parts:
+
+1.  **Data Loading & Initial Exploration:**
+    * Loaded and understood the various observations, actions, and game parameters.
+    * Performed initial sanity checks and basic statistical analyses.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
