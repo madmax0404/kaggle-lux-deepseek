@@ -35,7 +35,13 @@ The key challenges were:
 
 The problem was notably complex, characterized by a large state space and the need for long-term planning. Adding to this complexity were distributed decision-making across multiple units, intricate resource management at the unit level, and a highly dynamic environment. Further challenges arose from partial observability, a need for multi-variable optimization, randomized game mechanics, and a complex action space with intricate interactions, all while demanding robust opponent modeling and real-time decision-making.
 
+## 3. Dataset
 
+The core files can be downloaded from the below competition page. The page also describes how to install the game engine library. The game environment can be generated using the game engine.
+
+https://www.kaggle.com/competitions/lux-ai-season-3/data
+
+## 4. Methodology & Approach
 
 
 
