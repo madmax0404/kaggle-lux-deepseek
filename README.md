@@ -41,13 +41,21 @@ The core files can be downloaded from the below competition page. The page also 
 
 https://www.kaggle.com/competitions/lux-ai-season-3/data
 
-## 4. Methodology & Approach
+## 4. Approach & Methodology
+
+I tried to use 
+
+1. Game environment, observations, actions, parameters
+2. prompt engineering
+3. 
+
+
 
 Since it was not a trivial task, data exploration, trial and error were done throughout the project. However, the works may be divided into the following parts:
 
-1.  **Data Loading & Initial Exploration:**
-    * Loaded and understood the various observations, actions, and game parameters.
-    * Performed initial sanity checks and basic statistical analyses.
+1.  ** Game Environment(Data) Loading & Exploration:**
+    * Loading and understanding the various environments, observations, actions, and game parameters.
+    * Performing sanity checks and statistical analyses.
 
 
 
