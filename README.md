@@ -111,7 +111,7 @@ The process can be divided into a few major steps:
 
 **Conclusion**: This project served as a proof-of-concept that reinforcement learning can fine-tune a language model to operate in a complex game environment. While the LLM agent did not outperform specialized solutions, it validated the concept that an LLM can learn game strategies via trial and error. The work is highly experimental, but it provides a stepping stone for future research. With larger models or more advanced techniques (such as combining with planning algorithms or using human feedback for reward tuning), LLM-based agents might become more competitive in complex environments. In summary, this repository showcases an innovative integration of modern LLMs with reinforcement learning in a gaming context. It emphasizes the technical stack (Hugging Face ecosystem, PPO, JAX environment) and the methodology of training a novel agent. The insights gained here contribute to understanding how far I can push LLMs beyond traditional language tasks – highlighting both their strengths in reasoning and the practical challenges when applied to dynamic, embodied decision-making tasks.
 
-## Project Structure
+## 프로젝트 구조 (Project Structure)
     kaggle-lux-deepseek/
     ├── Notebooks/
     │   ├── Agent_Development/                        # 에이전트 개발 및 실험
