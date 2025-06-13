@@ -1,24 +1,14 @@
-# NeurIPS 2024 - Lux AI Season 3
-## https://www.kaggle.com/competitions/lux-ai-season-3
+# NeurIPS 2024 - Lux AI Season 3 – LLM Agent (DeepSeek-R1-Distill-Qwen-1.5B)
+### https://www.kaggle.com/competitions/lux-ai-season-3
 
-Lux AI Season 3 – LLM Agent (DeepSeek-R1-Distill-Qwen-1.5B)
-Overview
-Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants develop AI bots to play a complex 1v1 resource-gathering game
-GitHub
-. This project is an experimental exploration of using a large language model (LLM) as the core of an AI agent for the competition. Instead of the typical specialized neural networks, we fine-tuned a 1.5 billion-parameter LLM (DeepSeek-R1-Distill-Qwen-1.5B) via reinforcement learning (PPO) to control the game agent
-GitHub
-GitHub
-. The goal was to investigate the viability of an LLM-based strategy agent in a complex, multi-agent environment. This unconventional approach serves as a proof-of-concept, highlighting both the potential and challenges of applying LLMs to strategic game AI.
-Tech Stack
-Programming Language: Python
-Machine Learning Framework: PyTorch
-Large Language Model: DeepSeek-R1-Distill-Qwen-1.5B – a distilled 1.5B-parameter Qwen model from DeepSeek-AI
-GitHub
-. This compact LLM was chosen for its strong reasoning capabilities relative to size, achieved by distillation from a larger RL-trained model
-openlaboratory.ai
-openlaboratory.ai
-.
-LLM Libraries: Hugging Face Transformers for model integration
+## Overview
+Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants develop AI bots to play a complex 1v1 resource-gathering game. This project is an experimental exploration of using a large language model (LLM) as the core of an AI agent for the competition. Instead of the typical specialized neural networks, we fine-tuned a 1.5 billion-parameter LLM (DeepSeek-R1-Distill-Qwen-1.5B) via reinforcement learning (PPO) to control the game agent. The goal was to investigate the viability of an LLM-based strategy agent in a complex, multi-agent environment. This unconventional approach serves as a proof-of-concept, highlighting both the potential and challenges of applying LLMs to strategic game AI.
+
+## Tech Stack
+* Programming Language: Python
+* Machine Learning Framework: PyTorch
+* Large Language Model: DeepSeek-R1-Distill-Qwen-1.5B – a distilled 1.5B-parameter Qwen model from DeepSeek-AI. This compact LLM was chosen for its strong reasoning capabilities relative to size, achieved by distillation from a larger RL-trained model. (https://openlaboratory.ai/models/deepseek-r1-qwen-1_5b)
+* LLM Libraries: Hugging Face Transformers for model integration
 GitHub
 , with Accelerate for device management and BitsAndBytes for 4-bit quantization (to efficiently load the model under GPU memory constraints).
 Reinforcement Learning: Hugging Face TRL (Transformer Reinforcement Learning) library
