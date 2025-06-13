@@ -1,10 +1,7 @@
 # NeurIPS 2024 - Lux AI Season 3 – LLM Agent (DeepSeek-R1-Distill-Qwen-1.5B)
 ### https://www.kaggle.com/competitions/lux-ai-season-3
 
-## Overview
-Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants develop AI bots to play a complex 1v1 resource-gathering game. This project is an experimental exploration of using a large language model (LLM) as the core of an AI agent for the competition. Instead of the typical specialized neural networks, I fine-tuned a 1.5 billion-parameter LLM (DeepSeek-R1-Distill-Qwen-1.5B) via reinforcement learning (PPO) to control the game agent. The goal was to investigate the viability of an LLM-based strategy agent in a complex, multi-agent environment. This unconventional approach serves as a proof-of-concept, highlighting both the potential and challenges of applying LLMs to strategic game AI.
-
-## Tech Stack
+## Tech Stack (기술 스택)
 * **Programming Language**: Python
 * **Machine Learning Framework**: PyTorch
 * **Large Language Model**: DeepSeek-R1-Distill-Qwen-1.5B – a distilled 1.5B-parameter Qwen model from DeepSeek-AI. This compact LLM was chosen for its strong reasoning capabilities relative to size, achieved by distillation from a larger RL-trained model. (https://openlaboratory.ai/models/deepseek-r1-qwen-1_5b)
@@ -12,6 +9,22 @@ Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants devel
 * **Reinforcement Learning**: Hugging Face TRL (Transformer Reinforcement Learning) library using the Proximal Policy Optimization (PPO) algorithm. This allowed us to fine-tune the LLM with reward signals.
 * **Environment**: Lux AI Season 3 game environment (luxai_s3 Python package) for simulation. The environment is JAX-based but wrapped for Python usage, providing the game’s state and reward mechanics.
 * **Tooling & Platform**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
+
+---
+
+# 한국어
+
+## 개요
+Lux AI 시즌 3는 Kaggle에서 진행되는 NeurIPS 2024 대회로, 참가자들은 복잡한 1대1 자원 수집 게임을 플레이하는 AI 봇을 개발합니다. 이 프로젝트는 대규모 언어 모델(LLM)을 경쟁용 AI 에이전트의 핵심으로 사용하는 실험적인 탐구입니다.
+
+일반적인 전문화된 신경망 대신, 저는 15억 개의 매개변수를 가진 LLM(DeepSeek-R1-Distill-Qwen-1.5B)을 강화 학습(PPO)을 통해 미세 조정하여 게임 에이전트를 제어했습니다. 목표는 복잡한 다중 에이전트 환경에서 LLM 기반 전략 에이전트의 실현 가능성을 조사하는 것이었습니다. 이 틀에 얽매이지 않는 접근 방식은 전략 게임 AI에 LLM을 적용하는 데 있어 잠재력과 과제를 모두 강조하는 개념 증명(proof-of-concept) 역할을 합니다.
+
+---
+
+# English
+
+## Overview
+Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants develop AI bots to play a complex 1v1 resource-gathering game. This project is an experimental exploration of using a large language model (LLM) as the core of an AI agent for the competition. Instead of the typical specialized neural networks, I fine-tuned a 1.5 billion-parameter LLM (DeepSeek-R1-Distill-Qwen-1.5B) via reinforcement learning (PPO) to control the game agent. The goal was to investigate the viability of an LLM-based strategy agent in a complex, multi-agent environment. This unconventional approach serves as a proof-of-concept, highlighting both the potential and challenges of applying LLMs to strategic game AI.
 
 ## Problem Statement (Lux AI Game)
 In the Lux AI Season 3 game, two players compete on a 24x24 grid of tiles. Each player controls a fleet of ships to collect energy resources scattered across the map. A full game consists of up to 5 matches, each 100 turns long; the player who wins 3 out of 5 matches wins the game. Key game mechanics include: resource mining, deposit management, ship movement, and combat (ships can “sap” energy from enemy ships by colliding). The environment also features fog of war (limited visibility via nebula tiles) and varied tile types (e.g. asteroids that block movement).
