@@ -43,7 +43,9 @@ https://www.kaggle.com/competitions/lux-ai-season-3/data
 
 ## 4. Approach & Methodology
 
-I tried to use 
+Generally, small specialized neural nets are used for this type of problems, but I tried to use an LLM (DeepSeek-R1-Distill-Qwen-1.5B) for this competition.
+
+asdf
 
 1. Game environment, observations, actions, parameters
 2. prompt engineering
