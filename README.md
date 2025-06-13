@@ -1,7 +1,7 @@
 # NeurIPS 2024 - Lux AI Season 3 – LLM Agent (DeepSeek-R1-Distill-Qwen-1.5B)
 ### https://www.kaggle.com/competitions/lux-ai-season-3
 
-## Tech Stack (기술 스택)
+## 기술 스택 (Tech Stack)
 * **Programming Language**: Python
 * **Machine Learning Framework**: PyTorch
 * **Large Language Model**: DeepSeek-R1-Distill-Qwen-1.5B – a distilled 1.5B-parameter Qwen model from DeepSeek-AI. This compact LLM was chosen for its strong reasoning capabilities relative to size, achieved by distillation from a larger RL-trained model. (https://openlaboratory.ai/models/deepseek-r1-qwen-1_5b)
