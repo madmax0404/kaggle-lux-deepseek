@@ -1,6 +1,6 @@
 # NeurIPS 2024 - Lux AI Season 3
 
-# https://www.kaggle.com/competitions/lux-ai-season-3
+## https://www.kaggle.com/competitions/lux-ai-season-3
 
 Lux AI Season 3 – LLM Agent (DeepSeek-R1-Distill-Qwen-1.5B)
 Overview
