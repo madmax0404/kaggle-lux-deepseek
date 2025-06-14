@@ -142,4 +142,5 @@ The process can be divided into a few major steps:
     │   │   └── lux/                                  # Lux AI 환경 래퍼
     │   ├── EDA/                                      # 탐색적 데이터 분석
     │   └── Testing_Agents/                           # 에이전트 테스트 및 검증
+    ├── images/
 
