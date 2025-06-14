@@ -9,6 +9,7 @@
 * **Reinforcement Learning**: Hugging Face TRL (Transformer Reinforcement Learning) library using the Proximal Policy Optimization (PPO) algorithm. This allowed us to fine-tune the LLM with reward signals.
 * **Environment**: Lux AI Season 3 game environment (luxai_s3 Python package) for simulation. The environment is JAX-based but wrapped for Python usage, providing the game’s state and reward mechanics.
 * **Tooling & Platform**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
+* **Visualization**: TensorBoard
 * **OS**: Linux (Ubuntu Desktop 24.04 LTS)
 
 ---
@@ -107,7 +108,15 @@ Generally, past solutions use custom neural networks (e.g. CNNs or MLPs) tailore
 The process can be divided into a few major steps:
 * **Environment Understanding & Data Exploration**: I first integrated the Lux AI environment into our pipeline and performed extensive exploration of its observations and mechanics. This involved loading the game engine and observing state representations (maps, ship statuses, sensor inputs). I conducted sanity checks and statistical analysis on game data (e.g., distribution of resource nodes, typical ship counts, etc.) to ground our intuition. Understanding the observation structure was crucial, since I needed to convert these raw features into a format suitable for an LLM.
 * **LLM Agent Design & Prompt Engineering**: A core challenge was mapping the structured game state into natural language or another sequential input format for the LLM. I designed a prompt schema that encodes relevant information about the game state at each turn. For example, the prompt might include summaries of each ship’s sensor readings, current energy, and nearby resources or threats. The LLM was expected to output an action decision, which I decoded into game commands. This step was essentially prompt engineering – crafting the input-output specification so that the language model could interpret the game situation and propose valid actions. I kept the prompts concise due to token limitations, and iteratively refined the format based on the model’s responses (e.g., ensuring the model’s output syntax matched the game’s expected action format).
+
+![Prompt Engineering Example](<images/Screenshot from 2025-06-14 12-38-21.png>)
+<sub>▲Prompt Engineering Example</sub>
+
 * **Reinforcement Learning Fine-Tuning (PPO Self-Play)**: With the LLM integrated, I fine-tuned it using reinforcement learning. I leveraged the Hugging Face TRL library’s PPO implementation, which allowed us to update the model’s weights based on a reward signal rather than supervised labels. The reward was derived from game outcomes – encouraging the model to choose actions that lead to higher energy gains and wins. To stabilize training, I employed self-play: two instances of the LLM agent played against each other in simulated matches. Self-play provided a curriculum of increasingly challenging scenarios, as the agent effectively learned from playing against its current skill level. After each game (or batch of games), the model’s policy was updated via PPO, using the difference in outcome (win/loss or intermediate score) as feedback. Key hyperparameters included a small batch size and frequent model updates, given the high variance in game outcomes. I also utilized techniques like reward shaping (assigning intermediate rewards for collecting resources or destroying enemy ships) to guide the learning process in such a sparse reward environment. Throughout training, I monitored metrics such as total reward per episode, win rates, and policy loss, adjusting parameters to prevent divergence.
+
+![Training Metrics Example](<images/Screenshot from 2025-03-09 23-57-56.png>)
+<sub>▲Training Metrics Example</sub>
+
 * **Experimentation & Iteration**: As this was an experimental project, a lot of iterative tuning was involved. I experimented with different prompt formats, model hyperparameters, and training setups (for instance, testing both fully online training and a replay buffer of past game states). I also tried various strategies to deal with the LLM’s verbosity and stochasticity – such as constraining the action vocabulary and using shorter generation lengths for decisions. Each iteration revealed insights that informed the next: for example, early tests showed the vanilla LLM often produced invalid or suboptimal actions, which led us to refine the prompt instructions and incorporate simple validation rules on the LLM’s output.
 
 ## Results & Insights
