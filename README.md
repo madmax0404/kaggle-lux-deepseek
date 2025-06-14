@@ -19,7 +19,7 @@
 ## 개요
 Lux AI 시즌 3는 Kaggle에서 진행되는 NeurIPS 2024 대회로, 참가자들은 복잡한 1대1 자원 수집 게임을 플레이하는 AI 봇을 개발합니다. 이 프로젝트는 대규모 언어 모델(LLM)을 경쟁용 AI 에이전트의 핵심으로 사용하는 실험적인 탐구입니다.
 
-일반적인 전문화된 신경망 대신, 저는 15억 개의 매개변수를 가진 LLM(DeepSeek-R1-Distill-Qwen-1.5B)을 강화 학습(PPO)을 통해 미세 조정하여 게임 에이전트를 제어했습니다. 목표는 복잡한 다중 에이전트 환경에서 LLM 기반 전략 에이전트의 실현 가능성을 조사하는 것이었습니다. 이 틀에 얽매이지 않는 접근 방식은 전략 게임 AI에 LLM을 적용하는 데 있어 잠재력과 과제를 모두 강조하는 개념 증명(proof-of-concept) 역할을 합니다.
+일반적인 전문화된 신경망 대신, 저는 15억 개의 매개변수를 가진 LLM(DeepSeek-R1-Distill-Qwen-1.5B)을 강화 학습(PPO)을 통해 파인 튜닝하여 게임 에이전트를 만들었습니다. 목표는 복잡한 다중 에이전트 환경에서 LLM 기반 전략 에이전트의 실현 가능성을 조사하는 것이었습니다. 이 틀에 얽매이지 않는 접근 방식은 전략 게임 AI에 LLM을 적용하는 데 있어 잠재력과 과제를 모두 강조하는 개념 증명(proof-of-concept) 역할을 합니다.
 
 ## 문제
 Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에서 경쟁하며, 각 플레이어는 함대를 조종하여 맵 곳곳에 흩어져 있는 에너지 자원을 수집합니다. 전체 게임은 최대 5번의 매치로 구성되며, 각 매치는 100턴 동안 진행됩니다. 5번의 매치 중 3번을 먼저 이기는 플레이어가 게임에서 승리합니다.
@@ -46,7 +46,12 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 프로세스는 몇 가지 주요 단계로 나눌 수 있습니다:
 
-* **환경 이해 및 데이터 탐색**: 먼저 Lux AI 환경을 파이프라인에 통합하고, 관측값과 메커니즘을 광범위하게 탐색했습니다. 게임 엔진을 로드하여 상태 표현(맵, 선박 상태, 센서 입력 등)을 관찰하고, 직관을 얻기 위해 데이터에 대한 sanity check 및 통계 분석(예: 자원 노드 분포, 일반적인 선박 수 등)을 진행했습니다. 관측 구조를 정확히 이해하는 것이 매우 중요했는데, 이는 원시 피처를 LLM에 적합한 형태로 변환해야 했기 때문입니다.
+* **아이디어의 실현 가능성 검즘**: 먼저, LLM이 이런 복잡한 게임을 플레이하는 것이 가능한지를 검증할 필요가 있었습니다. 웹 브라우저용 GPT-4o, DeepSeek-R1 등의 모델들에게 프롬프트 엔지니어링으로 게임 플레이를 시켜봤고, 충분히 실현 가능하다는 것을 확인했습니다.
+
+![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-32-03.png>)
+<sub>▲아이디어 실현 가능성 검즘 예시</sub>
+
+* **환경 이해 및 데이터 탐색**: Lux AI 환경을 파이프라인에 통합하고, 관측값과 메커니즘을 광범위하게 탐색했습니다. 게임 엔진을 로드하여 상태 표현(맵, 선박 상태, 센서 입력 등)을 관찰하고, 직관을 얻기 위해 데이터에 대한 sanity check 및 통계 분석(예: 자원 노드 분포, 일반적인 선박 수 등)을 진행했습니다. 관측 구조를 정확히 이해하는 것이 매우 중요했는데, 이는 원시 피처를 LLM에 적합한 형태로 변환해야 했기 때문입니다.
 
 * **LLM 에이전트 설계 및 프롬프트 엔지니어링**: 가장 핵심적인 과제는 구조화된 게임 상태를 자연어 또는 LLM이 이해할 수 있는 시퀀스 입력 형태로 매핑하는 것이었습니다. 각 턴마다 게임 상태에 관한 정보를 담는 프롬프트 스키마를 설계했으며, 예를 들어 각 선박의 센서 정보, 현재 에너지, 주변 자원 및 위협 요약 등이 프롬프트에 포함되었습니다. LLM은 행동 결정을 출력하며, 이는 다시 게임 명령으로 디코딩되었습니다. 이 과정은 본질적으로 프롬프트 엔지니어링으로, 언어 모델이 게임 상황을 해석하고 올바른 행동을 제안할 수 있도록 입출력 사양을 설계하는 일이었습니다. 토큰 제한 때문에 프롬프트를 최대한 간결하게 유지했으며, 모델의 반응을 보면서 포맷을 반복적으로 개선했습니다(예: 모델의 출력 문법이 게임의 예상 액션 포맷과 일치하는지 등).
 
@@ -106,7 +111,13 @@ These challenges make the problem notably complex, typically tackled with specia
 Generally, past solutions use custom neural networks (e.g. CNNs or MLPs) tailored to game state features. In contrast, this project uses an LLM-based agent, which required careful problem re-formulation and training strategy.
 
 The process can be divided into a few major steps:
+* **Proof-of-Concept Verification**: First, I needed to verify if LLMs could play such complex games. We tested game-playing with models like GPT-4o and DeepSeek-R1 for web browsers, using prompt engineering, and confirmed that it's indeed feasible.
+
+![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-32-03.png>)
+<sub>▲Proof-of-Concept Verification Example</sub>
+
 * **Environment Understanding & Data Exploration**: I first integrated the Lux AI environment into our pipeline and performed extensive exploration of its observations and mechanics. This involved loading the game engine and observing state representations (maps, ship statuses, sensor inputs). I conducted sanity checks and statistical analysis on game data (e.g., distribution of resource nodes, typical ship counts, etc.) to ground our intuition. Understanding the observation structure was crucial, since I needed to convert these raw features into a format suitable for an LLM.
+
 * **LLM Agent Design & Prompt Engineering**: A core challenge was mapping the structured game state into natural language or another sequential input format for the LLM. I designed a prompt schema that encodes relevant information about the game state at each turn. For example, the prompt might include summaries of each ship’s sensor readings, current energy, and nearby resources or threats. The LLM was expected to output an action decision, which I decoded into game commands. This step was essentially prompt engineering – crafting the input-output specification so that the language model could interpret the game situation and propose valid actions. I kept the prompts concise due to token limitations, and iteratively refined the format based on the model’s responses (e.g., ensuring the model’s output syntax matched the game’s expected action format).
 
 ![Prompt Engineering Example](<images/Screenshot from 2025-06-14 12-38-21.png>)
