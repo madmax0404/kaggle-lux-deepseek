@@ -48,7 +48,7 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 * **아이디어의 실현 가능성 검즘**: 먼저, LLM이 이런 복잡한 게임을 플레이하는 것이 가능한지를 검증할 필요가 있었습니다. 웹 브라우저용 GPT-4o, DeepSeek-R1 등의 모델들에게 프롬프트 엔지니어링으로 게임 플레이를 시켜봤고, 충분히 실현 가능하다는 것을 확인했습니다.
 
-![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-32-03.png>)
+![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-48-32.png>)
 <sub>▲아이디어 실현 가능성 검즘 예시</sub>
 
 * **환경 이해 및 데이터 탐색**: Lux AI 환경을 파이프라인에 통합하고, 관측값과 메커니즘을 광범위하게 탐색했습니다. 게임 엔진을 로드하여 상태 표현(맵, 선박 상태, 센서 입력 등)을 관찰하고, 직관을 얻기 위해 데이터에 대한 sanity check 및 통계 분석(예: 자원 노드 분포, 일반적인 선박 수 등)을 진행했습니다. 관측 구조를 정확히 이해하는 것이 매우 중요했는데, 이는 raw feature들을 LLM에 적합한 형태로 변환해야 했기 때문입니다.
@@ -113,7 +113,7 @@ Generally, past solutions use custom neural networks (e.g. CNNs or MLPs) tailore
 The process can be divided into a few major steps:
 * **Proof-of-Concept Verification**: First, I needed to verify if LLMs could play such complex games. We tested game-playing with models like GPT-4o and DeepSeek-R1 for web browsers, using prompt engineering, and confirmed that it's indeed feasible.
 
-![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-32-03.png>)
+![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-48-32.png>)
 <sub>▲Proof-of-Concept Verification Example</sub>
 
 * **Environment Understanding & Data Exploration**: I first integrated the Lux AI environment into our pipeline and performed extensive exploration of its observations and mechanics. This involved loading the game engine and observing state representations (maps, ship statuses, sensor inputs). I conducted sanity checks and statistical analysis on game data (e.g., distribution of resource nodes, typical ship counts, etc.) to ground our intuition. Understanding the observation structure was crucial, since I needed to convert these raw features into a format suitable for an LLM.
