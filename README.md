@@ -85,7 +85,7 @@ Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants devel
 ## Problem Statement (Lux AI Game)
 In the Lux AI Season 3 game, two players compete on a 24x24 grid of tiles. Each player controls a fleet of ships to collect energy resources scattered across the map. A full game consists of up to 5 matches, each 100 turns long; the player who wins 3 out of 5 matches wins the game. Key game mechanics include: resource mining, deposit management, ship movement, and combat (ships can “sap” energy from enemy ships by colliding). The environment also features fog of war (limited visibility via nebula tiles) and varied tile types (e.g. asteroids that block movement).
 
-▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>)
+▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>): Please download and run the file.
 
 Designing a successful agent for this game is challenging due to several factors:
 * **Large State Space & Partial Observability**: Each ship has a limited sensor range, so agents must make decisions with incomplete information. The map is randomly generated each episode, adding uncertainty and requiring adaptability.
