@@ -23,7 +23,7 @@ Lux AI 시즌 3는 Kaggle에서 진행되는 NeurIPS 2024 대회로, 참가자�
 ## 문제
 Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에서 경쟁하며, 각 플레이어는 함대를 조종하여 맵 곳곳에 흩어져 있는 에너지 자원을 수집합니다. 전체 게임은 최대 5번의 매치로 구성되며, 각 매치는 100턴 동안 진행됩니다. 5번의 매치 중 3번을 먼저 이기는 플레이어가 게임에서 승리합니다.
 
-▶️ [예시 리플레이 보기](<Notebooks/Agent_Development/replay_my_agent.html>): 다운받아서 실행해 주세요.
+▶️ [예시 리플레이 보기](<Notebooks/Agent_Development/replay_my_agent.html>): 보려면 다운받아서 실행해 주세요.
 
 주요 게임 메커니즘은 다음과 같습니다.
 * **자원 채굴**: 맵에서 에너지를 수집합니다.
@@ -85,7 +85,7 @@ Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants devel
 ## Problem Statement (Lux AI Game)
 In the Lux AI Season 3 game, two players compete on a 24x24 grid of tiles. Each player controls a fleet of ships to collect energy resources scattered across the map. A full game consists of up to 5 matches, each 100 turns long; the player who wins 3 out of 5 matches wins the game. Key game mechanics include: resource mining, deposit management, ship movement, and combat (ships can “sap” energy from enemy ships by colliding). The environment also features fog of war (limited visibility via nebula tiles) and varied tile types (e.g. asteroids that block movement).
 
-▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>): Please download and run the file.
+▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>): Please download and run the file to see.
 
 Designing a successful agent for this game is challenging due to several factors:
 * **Large State Space & Partial Observability**: Each ship has a limited sensor range, so agents must make decisions with incomplete information. The map is randomly generated each episode, adding uncertainty and requiring adaptability.
