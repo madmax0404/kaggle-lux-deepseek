@@ -37,7 +37,7 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 이러한 도전 과제들은 이 문제를 매우 복잡하게 만들며, 일반적으로 전문화된 강화 학습(RL) 에이전트나 휴리스틱 알고리즘으로 해결됩니다. 저희 프로젝트는 범용 LLM 에이전트로 이러한 복잡성을 처리함으로써 기존의 한계를 뛰어넘고자 합니다.
 
-▶️ [View Interactive Replay]
+▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>)
 
 ## 접근 방식 및 방법론
 
