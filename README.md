@@ -108,7 +108,7 @@ Designing a successful agent for this game is challenging due to several factors
 These challenges make the problem notably complex, typically tackled with specialized RL agents or heuristic algorithms. Our project pushes the envelope by attempting to handle this complexity with a generalist LLM agent.
 
 ## Approach & Methodology
-Generally, past solutions use custom neural networks (e.g. CNNs or MLPs) tailored to game state features. In contrast, this project uses an LLM-based agent, which required careful problem re-formulation and training strategy.
+Generally, existing solutions use custom neural networks (e.g. CNNs or MLPs) tailored to game state features. In contrast, this project uses an LLM-based agent, which required careful problem re-formulation and training strategy.
 
 The process can be divided into a few major steps:
 * **Proof-of-Concept Verification**: First, I needed to verify if LLMs could play such complex games. We tested game-playing with models like GPT-4o and DeepSeek-R1 for web browsers, using prompt engineering, and confirmed that it's indeed feasible.
