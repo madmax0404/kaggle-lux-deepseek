@@ -44,7 +44,7 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 일반적으로, 기존의 솔루션들은 게임 상태의 특성에 맞게 커스텀 신경망(CNN이나 MLP 등)을 사용합니다. 반면, 이 프로젝트에서는 LLM(대형 언어 모델) 기반 에이전트를 도입했으며, 이를 위해 문제 재정의와 훈련 전략 수립이 필요했습니다.
 
-![Model Architecture](<images/Screenshot from 2025-06-21 14-44-04.png>)
+![Model Architecture](<images/Screenshot from 2025-06-21 14-44-04.png> "Optional title that appears on hover")
 ### <sub>▲DeepSeek-R1-Distill-Qwen-1.5B 아키텍쳐</sub>
 
 프로세스는 몇 가지 주요 단계로 나눌 수 있습니다:
