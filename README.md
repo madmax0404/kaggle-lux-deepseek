@@ -164,7 +164,7 @@ The process can be divided into a few major steps:
     │   │   ├── agent/                                # 핵심 에이전트 구현
     │   │   │   ├── agent.py                          # 메인 에이전트 로직
     │   │   │   └── train.py                          # 훈련 스크립트
-    │   │   └── lux/                                  # Lux AI 환경 래퍼
+    │   │   └── Modified_PPO_Trainer/                 # HuggingFace PPO_Trainer 파일 수정하여 사용
     │   ├── EDA/                                      # 탐색적 데이터 분석
     │   └── Testing_Agents/                           # 에이전트 테스트 및 검증
     ├── images/
