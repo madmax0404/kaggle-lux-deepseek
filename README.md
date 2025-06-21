@@ -110,6 +110,9 @@ These challenges make the problem notably complex, typically tackled with specia
 ## Approach & Methodology
 Generally, existing solutions use custom neural networks (e.g. CNNs or MLPs) tailored to game state features. In contrast, this project uses an LLM-based agent, which required careful problem re-formulation and training strategy.
 
+![Model Architecture](<images/Screenshot from 2025-06-21 14-44-04.png>)
+<sub>▲DeepSeek-R1-Distill-Qwen-1.5B Architecture</sub>
+
 The process can be divided into a few major steps:
 * **Proof-of-Concept Verification**: First, I needed to verify if LLMs could play such complex games. We tested game-playing with models like GPT-4o and DeepSeek-R1 for web browsers, using prompt engineering, and confirmed that it's indeed feasible.
 
