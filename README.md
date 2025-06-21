@@ -24,7 +24,7 @@ Lux AI 시즌 3는 Kaggle에서 진행되는 NeurIPS 2024 대회로, 참가자�
 ## 문제
 Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에서 경쟁하며, 각 플레이어는 함대를 조종하여 맵 곳곳에 흩어져 있는 에너지 자원을 수집합니다. 전체 게임은 최대 5번의 매치로 구성되며, 각 매치는 100턴 동안 진행됩니다. 5번의 매치 중 3번을 먼저 이기는 플레이어가 게임에서 승리합니다.
 
-▶️ [예시 리플레이 보기](<Notebooks/Agent_Development/replay_my_agent.html>): 보려면 다운받아서 실행해 주세요.
+> ▶️ [예시 리플레이 보기](<Notebooks/Agent_Development/replay_my_agent.html>): 보려면 다운받아서 실행해 주세요.
 
 주요 게임 메커니즘은 다음과 같습니다.
 * **자원 채굴**: 맵에서 에너지를 수집합니다.
@@ -52,20 +52,23 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 * **아이디어의 실현 가능성 검즘**: 먼저, LLM이 이런 복잡한 게임을 플레이하는 것이 가능한지를 검증할 필요가 있었습니다. 웹 브라우저용 GPT-4o, DeepSeek-R1 등의 모델들에게 프롬프트 엔지니어링으로 게임 플레이를 시켜봤고, 충분히 실현 가능하다는 것을 확인했습니다.
 
-![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-48-32.png>)
-<sub>▲아이디어 실현 가능성 검즘 예시</sub>
+> ![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-48-32.png>)
+>
+> ▲아이디어 실현 가능성 검즘 예시
 
 * **환경 이해 및 데이터 탐색**: Lux AI 환경을 파이프라인에 통합하고, 관측값과 메커니즘을 광범위하게 탐색했습니다. 게임 엔진을 로드하여 상태 표현(맵, 선박 상태, 센서 입력 등)을 관찰하고, 직관을 얻기 위해 데이터에 대한 sanity check 및 통계 분석(예: 자원 노드 분포, 일반적인 선박 수 등)을 진행했습니다. 관측 구조를 정확히 이해하는 것이 매우 중요했는데, 이는 raw feature들을 LLM에 적합한 형태로 변환해야 했기 때문입니다.
 
 * **LLM 에이전트 설계 및 프롬프트 엔지니어링**: 가장 핵심적인 과제는 구조화된 게임 상태를 자연어 또는 LLM이 이해할 수 있는 시퀀스 입력 형태로 매핑하는 것이었습니다. 각 턴마다 게임 상태에 관한 정보를 담는 프롬프트 스키마를 설계했으며, 예를 들어 각 선박의 센서 정보, 현재 에너지, 주변 자원 및 위협 요약 등이 프롬프트에 포함되었습니다. LLM은 행동 결정을 출력하며, 이는 다시 게임 명령으로 디코딩되었습니다. 이 과정은 본질적으로 프롬프트 엔지니어링으로, 언어 모델이 게임 상황을 해석하고 올바른 행동을 제안할 수 있도록 입출력 사양을 설계하는 일이었습니다. 토큰 제한 때문에 프롬프트를 최대한 간결하게 유지했으며, 모델의 반응을 보면서 포맷을 반복적으로 개선했습니다(예: 모델의 출력 문법이 게임의 예상 액션 포맷과 일치하는지 등).
 
-![Prompt Engineering Example](<images/Screenshot from 2025-06-14 12-38-21.png>)
-<sub>▲프롬프트 엔지니어링 예시</sub>
+> ![Prompt Engineering Example](<images/Screenshot from 2025-06-14 12-38-21.png>)
+>
+> ▲프롬프트 엔지니어링 예시
 
 * **강화학습 파인튜닝(PPO 셀프플레이)**: LLM을 통합한 뒤에는 강화학습으로 파인튜닝을 진행했습니다. Hugging Face의 TRL 라이브러리의 PPO 구현을 활용하여, 지도 학습 레이블 대신 보상 신호를 기반으로 모델 가중치를 업데이트했습니다. 보상은 게임 결과에서 추출되었으며, 에너지 획득과 승리에 기여하는 행동을 유도했습니다. 훈련의 안정화를 위해 셀프플레이를 도입했는데, 두 LLM 에이전트 인스턴스가 시뮬레이션된 경기에서 서로 대결하며, 현재 실력에 맞는 점진적으로 어려워지는 시나리오에서 학습할 수 있도록 했습니다. 각 경기(또는 게임 배치) 이후, PPO로 정책을 업데이트했고, 결과(승패 또는 중간 점수)의 차이를 피드백으로 사용했습니다. 주요 하이퍼파라미터로는 게임 결과의 분산이 크기 때문에 작은 배치 사이즈와 잦은 업데이트를 사용했습니다. 또한 보상 설계(reward shaping, 예: 자원 수집이나 적 선박 파괴에 중간 보상을 부여)를 적용해 희소 보상 환경에서도 학습이 잘 이루어지도록 유도했습니다. 훈련 내내 에피소드당 총 보상, 승률, 정책 손실 등의 지표를 모니터링하며, 발산을 방지하기 위해 파라미터를 조정했습니다.
 
-![Training Metrics Example](<images/Screenshot from 2025-03-09 23-57-56.png>)
-<sub>▲훈련 지표 예시</sub>
+> ![Training Metrics Example](<images/Screenshot from 2025-03-09 23-57-56.png>)
+>
+> ▲훈련 지표 예시
 
 * **실험 및 반복**: 이 프로젝트는 실험적인 성격이 강해 반복적인 튜닝이 필수적이었습니다. 다양한 프롬프트 포맷, 모델 하이퍼파라미터, 훈련 방식을 실험했고(예: 완전 온라인 학습 vs. 과거 게임 상태의 리플레이 버퍼 등), LLM의 장황함과 확률적 성향을 다루기 위한 전략(예: 행동 어휘 제한, 짧은 출력 사용 등)도 시도해봤습니다. 각 반복마다 얻은 인사이트가 다음 단계의 개선으로 이어졌으며, 예를 들어 초기 테스트에서 일반 LLM이 잘못된 행동이나 비효율적인 행동을 자주 내놓는다는 점을 발견해, 프롬프트 지침을 다듬고 LLM 출력에 간단한 검증 규칙을 추가하게 되었습니다.
 
@@ -101,7 +104,7 @@ Lux AI Season 3 is a NeurIPS 2024 competition on Kaggle where participants devel
 ## Problem Statement (Lux AI Game)
 In the Lux AI Season 3 game, two players compete on a 24x24 grid of tiles. Each player controls a fleet of ships to collect energy resources scattered across the map. A full game consists of up to 5 matches, each 100 turns long; the player who wins 3 out of 5 matches wins the game. Key game mechanics include: resource mining, deposit management, ship movement, and combat (ships can “sap” energy from enemy ships by colliding). The environment also features fog of war (limited visibility via nebula tiles) and varied tile types (e.g. asteroids that block movement).
 
-▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>): Please download and run the file to see.
+> ▶️ [View Interactive Replay](<Notebooks/Agent_Development/replay_my_agent.html>): Please download and run the file to see.
 
 Designing a successful agent for this game is challenging due to several factors:
 * **Large State Space & Partial Observability**: Each ship has a limited sensor range, so agents must make decisions with incomplete information. The map is randomly generated each episode, adding uncertainty and requiring adaptability.
@@ -114,26 +117,30 @@ These challenges make the problem notably complex, typically tackled with specia
 ## Approach & Methodology
 Generally, existing solutions use custom neural networks (e.g. CNNs or MLPs) tailored to game state features. In contrast, this project uses an LLM-based agent, which required careful problem re-formulation and training strategy.
 
-![Model Architecture](<images/Screenshot from 2025-06-21 14-44-04.png>)
-<sub>▲DeepSeek-R1-Distill-Qwen-1.5B Architecture</sub>
+> ![Model Architecture](<images/Screenshot from 2025-06-21 14-44-04.png>)
+>
+> ▲DeepSeek-R1-Distill-Qwen-1.5B Architecture
 
 The process can be divided into a few major steps:
 * **Proof-of-Concept Verification**: First, I needed to verify if LLMs could play such complex games. We tested game-playing with models like GPT-4o and DeepSeek-R1 for web browsers, using prompt engineering, and confirmed that it's indeed feasible.
 
-![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-48-32.png>)
-<sub>▲Proof-of-Concept Verification Example</sub>
+> ![Proof-of-Concept](<images/Screenshot from 2025-06-14 13-48-32.png>)
+>
+> ▲Proof-of-Concept Verification Example
 
 * **Environment Understanding & Data Exploration**: I first integrated the Lux AI environment into our pipeline and performed extensive exploration of its observations and mechanics. This involved loading the game engine and observing state representations (maps, ship statuses, sensor inputs). I conducted sanity checks and statistical analysis on game data (e.g., distribution of resource nodes, typical ship counts, etc.) to ground our intuition. Understanding the observation structure was crucial, since I needed to convert these raw features into a format suitable for an LLM.
 
 * **LLM Agent Design & Prompt Engineering**: A core challenge was mapping the structured game state into natural language or another sequential input format for the LLM. I designed a prompt schema that encodes relevant information about the game state at each turn. For example, the prompt might include summaries of each ship’s sensor readings, current energy, and nearby resources or threats. The LLM was expected to output an action decision, which I decoded into game commands. This step was essentially prompt engineering – crafting the input-output specification so that the language model could interpret the game situation and propose valid actions. I kept the prompts concise due to token limitations, and iteratively refined the format based on the model’s responses (e.g., ensuring the model’s output syntax matched the game’s expected action format).
 
-![Prompt Engineering Example](<images/Screenshot from 2025-06-14 12-38-21.png>)
-<sub>▲Prompt Engineering Example</sub>
+> ![Prompt Engineering Example](<images/Screenshot from 2025-06-14 12-38-21.png>)
+>
+> ▲Prompt Engineering Example
 
 * **Reinforcement Learning Fine-Tuning (PPO Self-Play)**: With the LLM integrated, I fine-tuned it using reinforcement learning. I leveraged the Hugging Face TRL library’s PPO implementation, which allowed us to update the model’s weights based on a reward signal rather than supervised labels. The reward was derived from game outcomes – encouraging the model to choose actions that lead to higher energy gains and wins. To stabilize training, I employed self-play: two instances of the LLM agent played against each other in simulated matches. Self-play provided a curriculum of increasingly challenging scenarios, as the agent effectively learned from playing against its current skill level. After each game (or batch of games), the model’s policy was updated via PPO, using the difference in outcome (win/loss or intermediate score) as feedback. Key hyperparameters included a small batch size and frequent model updates, given the high variance in game outcomes. I also utilized techniques like reward shaping (assigning intermediate rewards for collecting resources or destroying enemy ships) to guide the learning process in such a sparse reward environment. Throughout training, I monitored metrics such as total reward per episode, win rates, and policy loss, adjusting parameters to prevent divergence.
 
-![Training Metrics Example](<images/Screenshot from 2025-03-09 23-57-56.png>)
-<sub>▲Training Metrics Example</sub>
+> ![Training Metrics Example](<images/Screenshot from 2025-03-09 23-57-56.png>)
+>
+> ▲Training Metrics Example
 
 * **Experimentation & Iteration**: As this was an experimental project, a lot of iterative tuning was involved. I experimented with different prompt formats, model hyperparameters, and training setups (for instance, testing both fully online training and a replay buffer of past game states). I also tried various strategies to deal with the LLM’s verbosity and stochasticity – such as constraining the action vocabulary and using shorter generation lengths for decisions. Each iteration revealed insights that informed the next: for example, early tests showed the vanilla LLM often produced invalid or suboptimal actions, which led us to refine the prompt instructions and incorporate simple validation rules on the LLM’s output.
 
