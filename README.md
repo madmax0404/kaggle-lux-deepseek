@@ -160,12 +160,8 @@ The process can be divided into a few major steps:
     kaggle-lux-deepseek/
     ├── Notebooks/
     │   ├── Agent_Development/                        # 에이전트 개발 및 실험
-    │   │   ├── DeepSeek-R1-Distill-Qwen-1.5B*.ipynb  # 모델별 실험 노트북
-    │   │   ├── agent/                                # 핵심 에이전트 구현
-    │   │   │   ├── agent.py                          # 메인 에이전트 로직
-    │   │   │   └── train.py                          # 훈련 스크립트
-    │   │   └── Modified_PPO_Trainer/                 # HuggingFace PPO_Trainer 파일 수정하여 사용
-    │   ├── EDA/                                      # 탐색적 데이터 분석
-    │   └── Testing_Agents/                           # 에이전트 테스트 및 검증
-    ├── images/
+    │   │   ├── Modified_PPO_Trainer/                 # HuggingFace PPO_Trainer 파일 수정하여 사용
+    │   │   └── DeepSeek-R1-Distill-Qwen-1.5B*.ipynb  # 모델별 실험 노트북
+    │   └── EDA/                                      # 탐색적 데이터 분석
+    └── images/
 
