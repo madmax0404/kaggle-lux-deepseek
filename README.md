@@ -10,7 +10,7 @@ https://www.kaggle.com/competitions/lux-ai-season-3
 * **LLM 라이브러리들**: Hugging Face Transformers for model integration, with Accelerate for device management and BitsAndBytes for 4-bit quantization (to efficiently load the model under GPU memory constraints).
 * **강화 학습**: Hugging Face TRL (Transformer Reinforcement Learning) library using the Proximal Policy Optimization (PPO) algorithm. This allowed us to fine-tune the LLM with reward signals.
 * **게임 환경**: Lux AI Season 3 game environment (luxai_s3 Python package) for simulation. The environment is JAX-based but wrapped for Python usage, providing the game’s state and reward mechanics.
-* **도구 및 플랫폼**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
+* **툴 및 플랫폼**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
 * **시각화**: TensorBoard
 * **운영체제**: Linux (Ubuntu Desktop 24.04 LTS)
 
