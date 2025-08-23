@@ -3,16 +3,16 @@ https://www.kaggle.com/competitions/lux-ai-season-3
 
 ---
 
-## 기술 스택 (Tech Stack)
-* **Programming Language**: Python
-* **Deep Learning Framework**: PyTorch
+## 기술 스택
+* **언어**: Python
+* **딥러닝 프레임워크**: PyTorch
 * **Large Language Model**: DeepSeek-R1-Distill-Qwen-1.5B – a distilled 1.5B-parameter Qwen model from DeepSeek-AI. This compact LLM was chosen for its strong reasoning capabilities relative to size, achieved by distillation from a larger RL-trained model. (https://openlaboratory.ai/models/deepseek-r1-qwen-1_5b)
-* **LLM Libraries**: Hugging Face Transformers for model integration, with Accelerate for device management and BitsAndBytes for 4-bit quantization (to efficiently load the model under GPU memory constraints).
-* **Reinforcement Learning**: Hugging Face TRL (Transformer Reinforcement Learning) library using the Proximal Policy Optimization (PPO) algorithm. This allowed us to fine-tune the LLM with reward signals.
-* **Environment**: Lux AI Season 3 game environment (luxai_s3 Python package) for simulation. The environment is JAX-based but wrapped for Python usage, providing the game’s state and reward mechanics.
-* **Tooling & Platform**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
-* **Visualization**: TensorBoard
-* **OS**: Linux (Ubuntu Desktop 24.04 LTS)
+* **LLM 라이브러리들**: Hugging Face Transformers for model integration, with Accelerate for device management and BitsAndBytes for 4-bit quantization (to efficiently load the model under GPU memory constraints).
+* **강화 학습**: Hugging Face TRL (Transformer Reinforcement Learning) library using the Proximal Policy Optimization (PPO) algorithm. This allowed us to fine-tune the LLM with reward signals.
+* **게임 환경**: Lux AI Season 3 game environment (luxai_s3 Python package) for simulation. The environment is JAX-based but wrapped for Python usage, providing the game’s state and reward mechanics.
+* **도구 및 플랫폼**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
+* **시각화**: TensorBoard
+* **운영체제**: Linux (Ubuntu Desktop 24.04 LTS)
 
 ---
 
@@ -98,7 +98,7 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 ---
 
-## 프로젝트 구조 (Project Structure)
+## 프로젝트 구조
     kaggle-lux-deepseek/
     ├── Notebooks/
     │   ├── Agent_Development/                        # 에이전트 개발 및 실험
