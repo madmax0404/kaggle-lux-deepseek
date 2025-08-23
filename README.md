@@ -1,6 +1,8 @@
 # NeurIPS 2024 - Lux AI Season 3 – LLM Agent (DeepSeek-R1-Distill-Qwen-1.5B)
 https://www.kaggle.com/competitions/lux-ai-season-3
 
+---
+
 ## 기술 스택 (Tech Stack)
 * **Programming Language**: Python
 * **Deep Learning Framework**: PyTorch
