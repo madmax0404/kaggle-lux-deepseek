@@ -98,6 +98,32 @@ Lux AI 시즌 3 게임은 두 명의 플레이어가 24x24 격자 타일 위에�
 
 ---
 
+## 프로젝트 실행 방법
+
+분석 및 모델 훈련 재현 방법:
+
+1.  **Repository 복제:**
+    ```bash
+    git clone [https://github.com/madmax0404/kaggle-lux-deepseek.git](https://github.com/madmax0404/kaggle-lux-deepseek.git)
+    cd kaggle-lux-deepseek
+    ```
+2.  **데이터셋 다운로드:**
+    * 캐글에서 대회에 참가하세요. [NeurIPS 2024 - Lux AI Season 3](https://www.kaggle.com/competitions/lux-ai-season-3)
+    * 데이터를 다운받은 후 알맞은 디렉토리에 저장하세요.
+3.  **가상 환경을 생성하고 필요한 라이브러리들을 설치해주세요:**
+    ```bash
+    conda create -n kaggle_lux_deepseek python=3.12 # or venv
+    conda activate kaggle_lux_deepseek
+    pip install -r requirements.txt
+    ```
+4.  **Jupyter Notebook을 실행해주세요:**
+    ```bash
+    jupyter notebook Notebooks
+    ```
+    데이터 처리, 모델 훈련 및 평가를 실행하려면 노트북의 단계를 따르세요.
+
+---
+
 ## 프로젝트 구조
     kaggle-lux-deepseek/
     ├── Notebooks/
