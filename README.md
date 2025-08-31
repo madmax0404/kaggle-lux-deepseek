@@ -6,6 +6,13 @@ https://www.kaggle.com/competitions/lux-ai-season-3
 
 ---
 
+## 개요
+Lux AI 시즌 3는 Kaggle에서 진행되는 NeurIPS 2024 대회로, 참가자들은 복잡한 1대1 자원 수집 게임을 플레이하는 AI 봇을 개발합니다. 이 프로젝트는 대규모 언어 모델(LLM)을 경쟁용 AI 에이전트의 핵심으로 사용하는 실험적인 탐구입니다.
+
+일반적인 전문화된 신경망 대신, 저는 15억 개의 매개변수를 가진 LLM(DeepSeek-R1-Distill-Qwen-1.5B)을 강화 학습(PPO)을 통해 파인 튜닝하여 게임 에이전트를 만들었습니다. 목표는 복잡한 다중 에이전트 환경에서 LLM 기반 전략 에이전트의 실현 가능성을 조사하는 것이었습니다. 이 틀에 얽매이지 않는 접근 방식은 전략 게임 AI에 LLM을 적용하는 데 있어 잠재력과 과제를 모두 강조하는 개념 증명(proof-of-concept) 역할을 합니다.
+
+---
+
 ## 기술 스택
 * **언어**: Python
 * **딥러닝 프레임워크**: PyTorch
@@ -16,13 +23,6 @@ https://www.kaggle.com/competitions/lux-ai-season-3
 * **툴 및 플랫폼**: Jupyter Notebooks (Kaggle Notebooks) and VS Code for development and experimentation. Training was conducted on an Ubuntu Linux system with CUDA support for GPU acceleration.
 * **시각화**: TensorBoard
 * **운영체제**: Linux (Ubuntu Desktop 24.04 LTS)
-
----
-
-## 개요
-Lux AI 시즌 3는 Kaggle에서 진행되는 NeurIPS 2024 대회로, 참가자들은 복잡한 1대1 자원 수집 게임을 플레이하는 AI 봇을 개발합니다. 이 프로젝트는 대규모 언어 모델(LLM)을 경쟁용 AI 에이전트의 핵심으로 사용하는 실험적인 탐구입니다.
-
-일반적인 전문화된 신경망 대신, 저는 15억 개의 매개변수를 가진 LLM(DeepSeek-R1-Distill-Qwen-1.5B)을 강화 학습(PPO)을 통해 파인 튜닝하여 게임 에이전트를 만들었습니다. 목표는 복잡한 다중 에이전트 환경에서 LLM 기반 전략 에이전트의 실현 가능성을 조사하는 것이었습니다. 이 틀에 얽매이지 않는 접근 방식은 전략 게임 AI에 LLM을 적용하는 데 있어 잠재력과 과제를 모두 강조하는 개념 증명(proof-of-concept) 역할을 합니다.
 
 ---
 
